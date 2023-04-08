@@ -1,0 +1,71 @@
+Express.js is a popular web application framework for Node.js. 
+It provides a robust set of features for building single-page, multi-page, and hybrid web applications. 
+Express.js allows developers to create scalable and maintainable web applications with ease. 
+It provides a simple and flexible API for handling HTTP requests and responses, as well as middleware for adding functionality such as authentication, logging, and error handling. 
+With its modular architecture, developers can easily add or remove features as needed. 
+
+
+Express.js provides several methods that can be used to handle HTTP requests. Here are some of the most commonly used ones:
+
+        GET: Used to retrieve a resource from the server.
+
+        POST: Used to submit data to the server to create or update a resource.
+
+        PUT: Used to update an existing resource on the server.
+
+        DELETE: Used to delete a resource from the server.
+        PATCH: Used to partially update an existing resource on the server.
+
+        HEAD: Similar to GET, but only retrieves the headers of the response, not the body.
+
+        OPTIONS: Used to retrieve information about the communication options available for a resource.
+
+        all:  This is a method in Express that allows you to handle all HTTP methods (GET, POST, PUT, DELETE, etc.) for a given route. For example, app.all('\users', (req, res) => { ... }) would handle all requests to the \users endpoint, regardless of the HTTP method used.
+
+        delete: This is a method in Express that allows you to handle DELETE requests for a given route. For example, app.delete('\users\:id', (req, res) => { ... }) would handle DELETE requests to the \users\:id endpoint, where :id is a parameter that can be accessed via req.params.id.
+        
+        use: This is a method in Express that allows you to use middleware functions for a given route or for the entire application. Middleware functions are functions that have access to the request and response objects, and can perform actions like logging, authentication, and error handling. For example, app.use(express.json()) would parse incoming JSON data and make it available on the req.body object.
+
+        listen: This is a method in Express that starts the server and listens for incoming requests on a specified port. For example, app.listen(3000, () => { console.log('Server started on port 3000') }) would start the server and listen for incoming requests on port 3000.
+
+
+Middleware functions in Express are functions that have access to the request (req) and response (res) objects, as well as the next() function in the application's request-response cycle. Middleware functions can perform various tasks such as modifying the request or response objects, performing authentication, logging, error handling, and more.
+Middleware functions can be defined at the application level using the app.use() method, which applies the middleware to all routes in the application, or at the route level using the same method but applied to a specific route.
+
+                Here is an example of a simple middleware function that logs the current date and time for each incoming request:
+
+                const express = require('express');
+                const app = express();
+
+                // Middleware function
+                const logger = (req, res, next) => {
+                console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+                next();
+                };
+                
+                // Apply middleware function to all routes
+                app.use(logger);
+
+                // Define routes
+                app.get('/', (req, res) => {
+                res.send('Hello World!');
+                });
+
+                // Start server
+                app.listen(3000, () => {
+                console.log('Server started on port 3000');
+                });
+                In this example, the logger middleware function logs the current date and time, the HTTP method, and the URL for each incoming request. The next() function is called to pass control to the next middleware function or route handler. The app.use(logger) statement applies the middleware function to all routes in the application.
+
+
+
+The code app.use(express.static('./public')) is used in an Express.js application to serve static files such as HTML, CSS, JavaScript, images, and other assets.
+
+                The express.static() middleware function takes a root directory path as an argument and returns a function that can be used as middleware. In this case, the root directory is './public', which means that any file requested by the client will be looked up in the public directory relative to the current working directory of the Node.js process.
+
+                When a request is made for a static file, the express.static() middleware function checks if the file exists in the specified directory. If it does, it sends the file back to the client with the appropriate content type header. If the file does not exist, it passes control to the next middleware function or route handler.
+
+                The app.use() method is used to mount the middleware function to the application's middleware stack. This means that every incoming request will pass through this middleware function before reaching any subsequent middleware functions or route handlers.
+
+                In summary, the code app.use(express.static('./public')) sets up a middleware function that serves static files from the public directory when requested by the client.
+

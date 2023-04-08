@@ -1,0 +1,12 @@
+HTTP methods, also known as HTTP verbs, are used in HTTP request (client-side) and response (server side) messages to communicate the intended action to be performed on a resource.
+
+Here are some of the most commonly used HTTP methods:
+
+        GET: retrieves a representation of the resource's state or data from the server. It should not have any side effects on the resource on the server.
+        POST: sends data to the server to create or update a resource. It may have side effects like creating a new resource or updating an existing one.
+        PUT: updates a resource at a specific URI with the data provided in the request body. If the resource does not exist, it creates a new one.
+        DELETE: deletes the specified resource.
+        PATCH: applies partial modifications to a resource.
+        There are other HTTP methods like OPTIONS, HEAD, TRACE, CONNECT which are less commonly used.
+
+It is important to note that the proper use of HTTP methods can help ensure the integrity and security of web applications. For example, POST requests are generally more secure than GET requests as they do not expose data being sent to the server in the URL.

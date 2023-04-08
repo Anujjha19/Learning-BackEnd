@@ -1,0 +1,121 @@
+ Node.js, Streams are a way to handle reading and writing data in chunks, instead of reading or writing the whole file at once. They are especially useful when dealing with large files or network sockets.
+
+There are four types of streams in Node.js: Readable, Writable, Duplex and Transform.
+
+Readable Stream
+
+        A Readable Stream is used for reading data from a source. It emits a 'data' event whenever there is data available to be read. You can attach a listener to this event to consume the data.
+
+        Here's an example of using a Readable Stream to read data from a file:
+
+        const fs = require('fs');
+
+        const readStream = fs.createReadStream('input.txt');
+
+        readStream.on('data', (chunk) => {
+        console.log(`Received ${chunk.length} bytes of data.`);
+        });
+
+        readStream.on('end', () => {
+        console.log('Finished reading data.');
+        });
+
+
+In the example above, we create a Readable Stream for the file 'input.txt'. We then add a listener to the 'data' event to log how many bytes of data were received. Finally, we add a listener to the 'end' event to log that we finished reading the data.
+
+Writable Stream
+
+        A Writable Stream is used for writing data to a destination. You can write data to the stream using the write() method. When you're done writing data, you should call the end() method to close the stream.
+
+        Here's an example of using a Writable Stream to write data to a file:
+
+        const fs = require('fs');
+
+        const writeStream = fs.createWriteStream('output.txt');
+
+        writeStream.write('hello');
+        writeStream.write('world');
+        writeStream.end();
+
+
+In the example above, we create a Writable Stream for the file 'output.txt'. We then write the strings 'hello' and 'world' to the stream using the write() method. Finally, we call the end() method to close the stream.
+
+Duplex Stream
+
+        A Duplex Stream is a stream that both reads from a source and writes to a destination. It combines the functionality of Readable and Writable Streams.
+
+        Here's an example of creating a Duplex Stream:
+
+        const { Duplex } = require('stream');
+
+        const myDuplexStream = new Duplex({
+        read(size) {
+            // reading logic
+        },
+        write(chunk, encoding, callback) {
+            // writing logic
+        }
+        });
+
+
+In this example, we create a Duplex Stream using the Duplex constructor. We pass in two methods: read() for reading data, and write() for writing data.
+
+Transform Stream
+
+        A Transform Stream is a type of Duplex Stream that can modify or transform the data as it passes through the stream. You can implement a Transform Stream by extending the Transform class.
+
+        Here's an example of creating a Transform Stream:
+
+        const { Transform } = require('stream');
+
+        class MyTransformStream extends Transform {
+        _transform(chunk, encoding, callback) {
+            // transform logic
+            const transformedChunk = chunk.toString().toUpperCase();
+            this.push(transformedChunk);
+            callback();
+        }
+        }
+
+        const myTransformStream = new MyTransformStream();
+
+        myTransformStream.write('hello');
+        myTransformStream.write('world');
+        myTransformStream.end();
+
+
+In this example, we create a Transform Stream by extending the Transform class. We override the _transform() method to modify the data by converting it to uppercase. We then write data to the stream and call end() to close it. The output will be 'HELLO' and 'WORLD'.
+
+
+*****
+
+readableStream.pipe(writableStream);
+
+
+Pushing FrommRead Stream to Write Stream 
+
+        In Node.js, the pipe() method is used to connect a Readable stream and a Writable stream together, so that the data being read from the Readable stream is automatically written to the Writable stream.
+
+                Here's an example of using pipe() to copy the contents of a file:
+
+
+                const fs = require('fs');
+
+                const readableStream = fs.createReadStream('input.txt');
+                const writableStream = fs.createWriteStream('output.txt');
+
+                readableStream.pipe(writableStream);
+                In this example, we create a Readable Stream for the file 'input.txt' and a Writable Stream for the file 'output.txt'. We then connect them using the pipe() method.
+
+        When you call pipe(), it returns the destination stream (in this case, writableStream), so you can chain multiple operations together. Here's an example of compressing data using zlib and then writing it to a file:
+
+                const fs = require('fs');
+                const zlib = require('zlib');
+
+                const readableStream = fs.createReadStream('input.txt');
+                const gzipStream = zlib.createGzip();
+                const writableStream = fs.createWriteStream('output.txt.gz');
+
+                readableStream.pipe(gzipStream).pipe(writableStream);
+                In this example, we create a Readable Stream for the file 'input.txt', a gzip Transform Stream using zlib.createGzip(), and a Writable Stream for the file 'output.txt.gz'. We pipe the readableStream to the gzipStream, which compresses the data, and then pipe the result to the writableStream to write it to a file.
+

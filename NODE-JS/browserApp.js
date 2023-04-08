@@ -1,0 +1,1 @@
+alert('Browser App LOGIC ')
