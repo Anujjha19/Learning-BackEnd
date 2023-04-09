@@ -69,3 +69,67 @@ The code app.use(express.static('./public')) is used in an Express.js applicatio
 
                 In summary, the code app.use(express.static('./public')) sets up a middleware function that serves static files from the public directory when requested by the client.
 
+
+API and SSR are two different approaches to building web applications, each with its own advantages and use cases.
+
+                API (Application Programming Interface) is a way of building web applications where the client-side code (usually written in JavaScript) communicates with a server-side API to fetch data and perform operations. The server-side API is responsible for handling requests, processing data, and returning responses in a structured format such as JSON or XML. 
+                Send Data RES.JSON()
+
+                SSR (Server-Side Rendering), on the other hand, is a way of building web applications where the server generates HTML pages dynamically and sends them to the client. In this approach, the server-side code (usually written in a server-side language like Node.js, PHP, or Python) is responsible for rendering the HTML, CSS, and JavaScript that make up the web page. 
+                Send Template RES.RENDER()
+
+                        The main advantage of using an API is that it allows for more flexibility and interactivity on the client-side. Since the client-side code can communicate with the server-side API asynchronously, it can fetch data and update the UI without requiring a full page refresh. This results in a faster and more responsive user experience.
+
+                        The main advantage of using SSR is that it provides better initial load times and SEO (Search Engine Optimization). Since the server generates the HTML pages dynamically, the client receives a fully rendered page on the first request, which can be beneficial for users with slow internet connections or devices with limited processing power. Additionally, search engines can crawl and index the pre-rendered HTML, which can improve the visibility of the website in search results.
+
+                In summary, API and SSR are two different approaches to building web applications, each with its own advantages and use cases. API is commonly used for building SPAs and mobile apps, while SSR is commonly used for improving initial load times and SEO.
+
+Param in Express
+        In Express, you can define route parameters by specifying a route path with a colon followed by the parameter name. For example:
+
+                // GET /users/:id
+                app.get('/users/:id', (req, res) => {
+                const userId = req.params.id;
+                
+                // Retrieve user data based on the ID
+                // ...
+                
+                res.send(`User ID: ${userId}`);
+                });
+                In this example, when a GET request is made to /users/123, the req.params object will contain { id: '123' }. You can then use this value to retrieve the corresponding user data from your database or other data source.
+
+        You can also define multiple route parameters in a single route path:
+
+
+                // GET /users/:id/posts/:postId
+                app.get('/users/:id/posts/:postId', (req, res) => {
+                const userId = req.params.id;
+                const postId = req.params.postId;
+                
+                // Retrieve post data based on the user ID and post ID
+                // ...
+                
+                res.send(`Post ID: ${postId} for User ID: ${userId}`);
+                });
+                In this example, when a GET request is made to /users/123/posts/456, the req.params object will contain { id: '123', postId: '456' }. You can then use these values to retrieve the corresponding post data for the specified user.
+
+
+
+Query String in Express
+
+        A query string is a part of a URL (Uniform Resource Locator) that contains data to be passed to web applications, such as parameters or filters. It starts with a question mark (?) and includes one or more key-value pairs separated by an ampersand (&). For example, in the URL https://www.example.com/search?q=apple&category=fruits, the query string is ?q=apple&category=fruits, where q and category are keys and apple and fruits are their respective values. Web applications can use this information to perform specific actions, such as searching for products or filtering results based on categories.
+
+                In Express, you can access the query string parameters using the req.query object. Here's an example of how to use query strings in an Express route:
+
+                // GET /search?q=apple&category=fruits
+                app.get('/search', (req, res) => {
+                const searchTerm = req.query.q; // 'apple'
+                const category = req.query.category; // 'fruits'
+                
+                // Perform search or filter based on the query string parameters
+                // ...
+                
+                res.send(`Search results for ${searchTerm} in ${category}`);
+                });
+                In this example, when a GET request is made to /search?q=apple&category=fruits, the req.query object will contain { q: 'apple', category: 'fruits' }. You can then use these values to perform a search or filter based on the user's input.
+
