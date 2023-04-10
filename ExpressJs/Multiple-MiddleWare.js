@@ -2,17 +2,15 @@
 
 const express = require('express')
 const app = express()
-
-const morgan = require('morgan')
-
 const logger = require('./logger-MiddleWare')
 const authorize = require('./authorize')
 
 
+
+
 // app.use(logger)
 // app.use(authorize)
-// app.use([authorize, logger])
-app.use(morgan('tiny'))
+app.use([authorize, logger])
 
 
 app.get('/', (req, res) => {

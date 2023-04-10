@@ -133,3 +133,113 @@ Query String in Express
                 });
                 In this example, when a GET request is made to /search?q=apple&category=fruits, the req.query object will contain { q: 'apple', category: 'fruits' }. You can then use these values to perform a search or filter based on the user's input.
 
+MiidleWare in Express
+
+        Middleware refers to a function that can be used to handle requests and responses in the application's HTTP request-response cycle. Middleware functions are executed sequentially, and each middleware has access to the request and response objects as well as the next middleware function in the stack.
+
+        Middleware functions can be used for a variety of purposes, such as logging, authentication, error handling, and more. They can be added to an application using the app.use() method, which takes a middleware function as its argument.
+
+                Here is an example of how to use middleware in an Express.js application:
+
+                // Define a middleware function
+                const myMiddleware = (req, res, next) => {
+                console.log('This is my middleware');
+                next();
+                };
+
+                // Add the middleware to the application
+                app.use(myMiddleware);
+
+                // Define a route handler
+                app.get('/', (req, res) => {
+                res.send('Hello World!');
+                });
+                In this example, the myMiddleware function is defined and added to the application using app.use(). When a request is made to the application, the middleware function will be executed first, logging a message to the console, before passing control to the route handler defined for the / route.
+
+                        Here is an example of how to use middleware in an Express.js application to log requests:
+                        
+                        // Define a middleware function to log requests
+                        const logger = (req, res, next) => {
+                        console.log(`${req.method} ${req.url}`);
+                        next();
+                        };
+
+                        // Add the middleware to the application
+                        app.use(logger);
+
+                        // Define a route handler
+                        app.get('/', (req, res) => {
+                        res.send('Hello World!');
+                        });
+                        In this example, the logger middleware function is defined to log the HTTP method and URL of each incoming request. The middleware function is then added to the application using app.use(). When a request is made to the application, the middleware function will be executed first, logging the request details to the console, before passing control to the route handler defined for the / route.
+       
+        In Express.js, req, res, and next are parameters that are commonly used in middleware functions.
+
+                req stands for "request" and represents the HTTP request object. It contains information about the incoming request such as the URL, headers, and any data sent in the request body.
+
+                res stands for "response" and represents the HTTP response object. It is used to send a response back to the client, such as HTML, JSON, or an error message.
+
+                next is a function that is called to pass control to the next middleware function in the stack. If next() is not called within a middleware function, the request-response cycle will be terminated and no further middleware functions or route handlers will be executed.
+
+
+        The app.use() method is used to add middleware functions to an Express.js application. It takes a callback function as its argument, which has access to the req, res, and next parameters. Middleware functions can be added globally to the application using app.use(), or locally to specific routes using router.use().
+
+
+Multiple middleware functions 
+
+        It is used for a single route or for the entire application. This is useful when you need to perform several operations on a request before sending a response back to the client.
+        To use multiple middleware functions for a single route, you can pass an array of middleware functions as the second argument to the app.get(), app.post(), or other HTTP method functions. For example:
+
+                app.get('/users', [middleware1, middleware2, middleware3], (req, res) => {
+                // Route handler code here
+                });
+                In this example, three middleware functions (middleware1, middleware2, and middleware3) are defined and passed as an array to the app.get() function. When a GET request is made to the /users route, each middleware function will be executed in order before the route handler code is executed.
+
+                        You can also use multiple middleware functions globally for the entire application using app.use(). For example:
+                        app.use(middleware1);
+                        app.use(middleware2);
+                        app.use(middleware3);
+                        In this example, three middleware functions (middleware1, middleware2, and middleware3) are defined and added to the application using app.use(). These middleware functions will be executed for every request made to the application, regardless of the route.
+
+        It's important to note that middleware functions must call next() to pass control to the next middleware function or route handler. If next() is not called, the request-response cycle will be terminated and no further middleware functions or route handlers will be executed.
+
+
+        app.use() and app.route() are both used to define middleware functions, but they have different purposes.
+
+                app.use() is used to add middleware functions to the application's request-response cycle. Middleware functions added using app.use() will be executed for every incoming request to the application, regardless of the route. This means that the middleware function will be applied to all routes in the application.
+                For example, if you want to add a middleware function to log information about each incoming request to the console, you can define the middleware function and then add it to the application using app.use():
+
+                        const loggerMiddleware = (req, res, next) => {
+                        console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+                        next();
+                        };
+                        app.use(loggerMiddleware);
+                        This middleware function will be executed for every incoming request to the application, regardless of the route.
+
+                app.route() is used to create a chainable route handler for a specific route. It allows you to define multiple HTTP methods on a single route and apply middleware functions to those methods.
+                For example, if you want to define a route for handling GET and POST requests to /users, you can use app.route():
+
+                        app.route('/users')
+                        .get((req, res) => {
+                        // handle GET request to /users
+                        })
+                        .post((req, res) => {
+                        // handle POST request to /users
+                        });
+
+                                You can also apply middleware functions to specific HTTP methods using app.route():
+                                        const authMiddleware = (req, res, next) => {
+                                        // check if user is authenticated
+                                        // if not, redirect to login page
+                                        };
+
+                                        app.route('/users')
+                                        .get(authMiddleware, (req, res) => {
+                                        // handle GET request to /users
+                                        })
+                                        .post(authMiddleware, (req, res) => {
+                                        // handle POST request to /users
+                                        });
+                                        In this example, the authMiddleware function will be executed before the route handler for both GET and POST requests to /users.
+
+
