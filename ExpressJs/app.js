@@ -3,32 +3,30 @@
 const express = require('express')
 const app = express()
 
-const morgan = require('morgan')
+let { people } = require('./data')
 
-const logger = require('./logger-MiddleWare')
-const authorize = require('./authorize')
-
-
-// app.use(logger)
-// app.use(authorize)
-// app.use([authorize, logger])
-app.use(morgan('tiny'))
+//Static Assests
+app.use(express.static('./methods-public'))
 
 
-app.get('/', (req, res) => {
-    res.send(" <h3> Home Page </h3>")
-})
-app.get('/about', (req, res) => {
-    res.send(" <h3> About Page </h3>")
-})
-app.get('/api/products', (req, res) => {
-    res.send(" <h3> Api Product Page </h3>")
+/* GET methods { Read Data } in Express - HTTP methods  */
+app.get('/api/people' , ( req ,res) => {
+    res.status(200).json( { success: true , data : people} )
 })
 
-app.get('/api/items', (req, res) => {
-    console.log(req.user)
-    res.send(" <h3> Api Items  Page </h3>")
-})
+/* POST methods { Insert Data } in Express - HTTP methods  */
+
+
+
+
+/* PUT methods { Updata Data } in Express - HTTP methods  */
+
+
+
+
+
+/* Delete methods { Delete Data } in Express - HTTP methods  */
+
 
 
 app.listen(5000, () => {
