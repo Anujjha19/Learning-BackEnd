@@ -1,67 +1,33 @@
-
-
 const express = require('express')
-const app = express()
-
-let { people } = require('./data')
+const router = express.Router();
 
 
-
-//Static Assests
-app.use(express.static('./methods-public'))
-//Parse Form Data
-app.use(express.urlencoded({ extended: false }))
-
-
-//Parse Json Data 
-app.use(express.json())
-
-/* GET methods { Read Data } in Express - HTTP methods  */
-app.get('/api/people', (req, res) => {
+/* router.get('/', (req, res) => {
     res.status(200).json({ success: true, data: people })
-})
+}) */
 
-/* POST methods { Insert Data } in Express - HTTP methods  */
-
-//JavaScript Examples
-app.post('/api/people', (req, res) => {
+/* router.post('/', (req, res) => {
     const { name } = req.body;
     if (!name) {
         res.status(400).json({ success: false, message: "Please Provide name Value " })
     }
     res.status(201).json({ success: true, person: name })
-
 })
+ */
 
-//FORM Examples 
-app.post('/login', (req, res) => {
-    const { name } = req.body;
-    if (name) {
-        return res.status(200).send(`Welcome ${name} `)
-    }
-    res.status(401).send(` Please Provide Credentials  `)
-})
-
-
-//Another Post Route Testing POSTMAN
-app.post('/api/postman/people', (req, res) => {
+/* 
+router.post('/postman', (req, res) => {
     const { name } = req.body;
     if (!name) {
         res.status(400).json({ success: false, message: "Please Provide name Value " })
     }
     res.status(201).json({ success: true, data: [...people, name] })
-})
+}) */
 
-
-
-/* PUT methods { Updata Data } in Express - HTTP methods  */
-
-app.put('/api/people/:id', (req, res) => {
+/* 
+router.put('/:id', (req, res) => {
     const { id } = req.params;
     const { name } = req.body;
-
-    // console.log(id, name);
-    // res.send('Hello World ')
     const person = people.find((person) => person.id === Number(id))
     if (!person) {
         return res
@@ -77,14 +43,9 @@ app.put('/api/people/:id', (req, res) => {
         return person;
     })
     res.status(200).json({ success: true, data: newPeople })
-})
+}) */
 
-
-
-/* Delete methods { Delete Data } in Express - HTTP methods  */
-
-
-app.delete('/api/people/:id', (req, res) => {
+/* router.delete('/:id', (req, res) => {
     const person = people.find((person) => person.id === Number(req.params.id))
     if (!person) {
         return res
@@ -95,8 +56,29 @@ app.delete('/api/people/:id', (req, res) => {
         (person) => person.id !== Number(req.params.id)
     )
     return res.status(200).json({ success: true, data: newPeople })
-})
+}) */
 
-app.listen(5000, () => {
-    console.log('Server is listening on Port 5000')
-})
+const { getPeople,
+    createPerson,
+    createPersonPostman,
+    updatePerson,
+    deletePerson } = require('../controllers/people')
+
+/* Way 1 */
+// router.get('/', getPeople)
+// router.post('/', createPerson)
+// router.post('/postman', createPersonPostman)
+// router.put('/:id', updatePerson)
+// router.delete('/:id', deletePerson)
+
+
+/* Way 2 */
+
+router.route('/').get(getPeople).post(createPerson)
+router.post('/postman', createPersonPostman)
+router.route('/:id').put(updatePerson).delete(deletePerson)
+
+
+
+
+module.exports = router;
