@@ -1,0 +1,153 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+      /* Custom styles for the registration form */
+      .registration-form {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #f2f2f2;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .registration-form h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .registration-form label {
+        font-weight: bold;
+        color: #555;
+      }
+
+      .registration-form input[type="text"],
+      .registration-form input[type="email"],
+      .registration-form input[type="tel"],
+      .registration-form input[type="number"],
+      .registration-form input[type="password"],
+      .registration-form select {
+        border-radius: 5px;
+        border: none;
+        border-bottom: 2px solid #ccc;
+        box-shadow: none;
+        padding-left: 0;
+        font-size: 16px;
+        color: #333;
+        background-color: transparent;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+      .registration-form input[type="text"]:focus,
+      .registration-form input[type="email"]:focus,
+      .registration-form input[type="tel"]:focus,
+      .registration-form input[type="number"]:focus,
+      .registration-form input[type="password"]:focus,
+      .registration-form select:focus {
+        border-color: #007bff;
+        box-shadow: none;
+      }
+
+      .registration-form button[type="submit"] {
+        width: 100%;
+        margin-top: 20px;
+        background-color: #007bff;
+        border-color: #007bff;
+        border-radius: 5px;
+        font-size: 18px;
+        color: #fff;
+        padding: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .registration-form button[type="submit"]:hover {
+        background-color: #0069d9;
+        border-color: #0062cc;
+      }
+
+      .registration-form a {
+        color: #007bff;
+        text-decoration: none;
+      }
+
+      .registration-form a:hover {
+        text-decoration: underline;
+      }
+
+      /* Radio buttons */
+      .form-check-input[type="radio"] {
+        margin-top: 0.3rem;
+        margin-right: 0.5rem;
+      }
+
+      .form-check-label {
+        font-weight: normal;
+        color: #555;
+      }
+    </style>
+  </head>
+  <body>
+    {{>navbar}}
+    <div class="container">
+      <div class="registration-form">
+        <h2>Registration Form</h2>
+        <form action="/register" method="POST">
+          <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter First Name" />
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter Last Name" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" />
+          </div>
+          <div class="form-group">
+            <label>Gender:</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" id="male" value="male" />
+              <label class="form-check-label" for="male">
+                Male
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" id="female" value="female" />
+              <label class="form-check-label" for="female">
+                Female
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter Phone Number" />
+          </div>
+          <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" class="form-control" id="age" name="age" placeholder="Enter Age" />
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" />
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirmpassword" placeholder="Confirm Password" />
+          </div>
+          <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+        <br />
+        <p>Already have an account? <a href="/login">Login here</a></p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Form</title>
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f2f2f2;
+    }
+
+    .login-form {
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+    }
+
+    .login-form h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      color: #007bff;
+      margin-bottom: 30px;
+    }
+
+    .login-form label {
+      font-weight: bold;
+      color: #555;
+      font-size: 1.2rem;
+    }
+
+    .login-form input[type="email"],
+    .login-form input[type="password"] {
+      border-radius: 5px;
+      border: none;
+      border-bottom: 2px solid #ddd;
+      box-shadow: none;
+      padding: 10px 15px;
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    .login-form input[type="email"]:focus,
+    .login-form input[type="password"]:focus {
+      border-color: #007bff;
+    }
+
+    .login-form button[type="submit"] {
+      width: 100%;
+      margin-top: 20px;
+      background-color: #007bff;
+      border-color: #007bff;
+      font-size: 1.2rem;
+      padding: 10px 15px;
+      border-radius: 5px;
+    }
+
+    .login-form button[type="submit"]:hover {
+      background-color: #0069d9;
+      border-color: #0062cc;
+    }
+
+    .login-form a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .login-form a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="login-form">
+      <h2>Login Form</h2>
+      <form action="/login" method="POST">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input name="email" type="email" class="form-control" id="email" placeholder="Enter Email" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input name="password" type="password" class="form-control" id="password" placeholder="Enter Password"
+            required />
+        </div>
+        <button type="submit" class="btn btn-primary">Sign In</button>
+      </form>
+    </div>
+    <div class="text-center mt-3">
+      <p>Don't have an account?
+        <a href="/register">Register here</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/node_modules/popper.js/dist/umd/popper.min.js"></script>
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
