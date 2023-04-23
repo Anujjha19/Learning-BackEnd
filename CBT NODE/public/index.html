@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cookie Example</title>
+</head>
+
+<body>
+    <label for="first_name">First Name:</label>
+    <input type="text" id="first_name" name="first_name"><br><br>
+    <label for="last_name">Last Name:</label>
+    <input type="text" id="last_name" name="last_name"><br><br>
+    <button id="set-cookie">Set Cookie</button>
+    <button id="get-cookie">Get Cookie</button>
+    <button id="delete-cookie">Delete Cookie</button>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#set-cookie').click(function () {
+                const firstName = $('#first_name').val();
+                const lastName = $('#last_name').val();
+                $.ajax({
+                    url: '/set-cookie',
+                    method: 'POST',
+                    data: { first_name: firstName, last_name: lastName },
+                    success: function (response) {
+                        alert(response);
+                    }
+                });
+            });
+
+            $('#get-cookie').click(function () {
+                $.ajax({
+                    url: '/get-cookie',
+                    method: 'GET',
+                    success: function (response) {
+                        alert(JSON.stringify(response));
+                    },
+                    error: function (error) {
+                        alert(error.responseText);
+                    }
+                });
+            });
+
+            $('#delete-cookie').click(function () {
+                $.ajax({
+                    url: '/delete-cookie',
+                    method: 'DELETE',
+                    success: function (response) {
+                        alert(response);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
+
+

@@ -1,0 +1,230 @@
+MongoDB Commands for DataBase
+
+
+        View all DataBase 
+            show dbs
+
+        To view You are in which DataBase
+            db
+
+        To create new or switch Databse 
+            use "name"
+
+        To delete DataBase
+            db.dropDatabase()
+
+
+
+MongoDB Commands for Collection
+
+
+        To see all the collection inside the DataBase
+            show collections
+
+        To create a new collection
+            db.createCollection('collection_name')
+
+        To delete a collection
+            db.collection_name.drop()
+
+
+
+MongoDB Commands for Rows
+
+        Insert Rows 
+            db.collection_name.insert(
+                {
+                    'name':"anuj",
+                    'age' : 21,
+                    'langujage' : "JS , C++ "
+                }
+            )
+
+        Inserting one Rows / one document
+            db.collection.insertOne(
+                { 
+                    name: "John Doe", 
+                    age: 30, 
+                    email: "johndoe@example.com"
+                }
+            );  
+
+        Inserting mnay Rows / multiple documents
+            db.collection.insertMany(
+                [
+                    { name: "Jane Doe", age: 25, email: "janedoe@example.com" },
+                    { name: "Bob Smith", age: 40, email: "bobsmith@example.com" },
+                    { name: "Alice Johnson", age: 35, email: "alicejohnson@example.com" }
+                ]
+                );
+
+         To see all the rows inside the collection
+            db.collection_name.find()
+        
+         Display all documents in the specified collection in a formatted, easy-to-read way
+            db.collection_name.find().pretty()
+
+
+
+Search / Find  in MongoDB
+
+        db.collection_name.find({language:"JS"})
+
+            Limit the number of documents 
+
+                db.collection_name.find().limit(10)
+
+            The skip() method to skip a certain number of documents before limiting the results
+
+                db.collection_name.find().skip(5).limit(10)
+
+            Total number of documents in your collection.
+
+                db.collection_name.find().count()
+                        EX: db.comments.find({name: "Anuj"}).count()
+
+
+            First Row matching the Object 
+                The findOne() method to find the first document in a collection that matches a specified filter
+
+                        db.collection_name.findOne({ field: value })
+
+
+            Sort on your Demands
+
+                db.collection_name.find().sort({ field1: 1, field2: -1 })
+                (1 for ascending and -1 for descending)
+                        EX: db.comments.find().sort({age:1})
+
+
+
+Update The Collection
+
+        The updateOne() method to update a single document that matches a specified filter
+
+                db.collection_name.updateOne({ field: value }, { $set: { field2: value2 } })
+
+                EX:  db.comments.updateOne({ name: "anik" }, {
+                        $set: {
+                                name: 'Anik Updated',
+                                age: 23,
+                                language: 'Python'
+                            }
+                        })
+
+            To add a new document with the name field set to "anik" if it does not exist, you can use the upsert option of the updateOne() method. The upsert option creates a new document if the filter does not match any existing documents.
+                    db.comments.updateOne(
+                        { name: "anik" },
+                        { $set: { age: 23, language: 'Python' } },
+                        { upsert: true }
+                            )
+
+
+
+        The updateMany() method to update multiple documents that match a specified filter
+
+                db.collection_name.updateMany({ field: value }, { $set: { field2: value2 } })
+
+                EX:
+                db.comments.updateMany({ age: 37 }, {
+                    $set: {
+                            age: 23
+                        },
+                    $unset: {
+                            name: "",
+                            language: ""
+                            }
+                        })
+
+
+
+Common Used Update operators in MongoDB:
+
+        $set: Sets the value of a field in a document.
+        $unset: Removes a field from a document.
+        $inc: Increments the value of a numeric field in a document.
+        $push: Adds an element to an array field in a document.
+        $addToSet: Adds an element to an array field in a document, but only if the element is not already present in the array.
+        $pull: Removes all elements that match a condition from an array field in a document.
+        $pop: Removes the first or last element of an array field in a document.
+        $rename: Renames a field in a document.
+
+
+    Rename Operator
+        db.comments.updateMany({ age: 23 }, {
+        $rename: {
+            "name": "fullName"
+        }
+        })
+
+    Increment Operator
+        db.comments.updateOne({ fullName: 'raju' }, {
+        $inc: {
+            age: 100
+        }
+        })
+
+
+
+                    $set: Sets the value of a field in a document.
+                    Suppose we have a collection named "students" and we want to set the age of a student named "John" to 20.
+                    db.students.updateOne({ name: "John" }, { $set: { age: 20 } })
+
+                    $unset: Removes a field from a document.
+                    Suppose we want to remove the "email" field from a document in the "students" collection where the name is "Alice".
+                    db.students.updateOne({ name: "Alice" }, { $unset: { email: "" } })
+
+                    $inc: Increments the value of a numeric field in a document.
+                    Suppose we want to increment the "age" field of a document in the "students" collection where the name is "John" by 1.
+                    db.students.updateOne({ name: "John" }, { $inc: { age: 1 } })
+
+                    $push: Adds an element to an array field in a document.
+                    Suppose we have a collection named "fruits" with a document that has an array field named "list" and we want to add a new element "banana" to the array.
+                    db.fruits.updateOne({}, { $push: { list: "banana" } })
+
+                    $addToSet: Adds an element to an array field in a document, but only if the element is not already present in the array.
+                    Suppose we want to add a new element "orange" to the "list" array of a document in the "fruits" collection, but only if it's not already present in the array.
+                    db.fruits.updateOne({}, { $addToSet: { list: "orange" } })
+
+                    $pull: Removes all elements that match a condition from an array field in a document.
+                    Suppose we have a collection named "fruits" with a document that has an array field named "list" and we want to remove all elements that match the condition where the element is "banana".
+                    db.fruits.updateOne({}, { $pull: { list: "banana" } })
+
+                    $pop: Removes the first or last element of an array field in a document.
+                    Suppose we have a collection named "fruits" with a document that has an array field named "list" and we want to remove the first element of the array.
+                    db.fruits.updateOne({}, { $pop: { list: -1 } })
+
+                    $rename: Renames a field in a document.
+                    Suppose we have a collection named "students" and we want to rename the field "email" to "contact" in a document where the name is "Alice".
+                    db.students.updateOne({ name: "Alice" }, { $rename: { email: "contact" } })
+
+
+ 
+Delete the Collection
+
+        The deleteOne() method to delete a single document that matches a specified filter
+            
+            db.comments.deleteOne({ name: "Anik Updated" })
+
+
+        The deleteMany() method to delete multiple documents that match a specified filter.
+
+            db.comments.deleteMany({ age: 23 })
+
+
+
+Greater or Less Than Filter 
+        Find all documents where the age field is greater than 30:
+                db.comments.find({ age: { $gt: 30 } })
+            
+        Find all documents where the age field is greater than 30:
+                db.comments.find({ age: { $gte: 30 } })
+
+        Find all documents where the age field is less than or equal to 40:
+                db.comments.find({ age: { $lt: 40 } })
+
+
+        Find all documents where the age field is less than or equal to 40:
+                db.comments.find({ age: { $lte: 40 } })
+
+
