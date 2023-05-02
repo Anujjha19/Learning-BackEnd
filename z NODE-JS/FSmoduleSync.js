@@ -21,7 +21,7 @@ On the other hand, fs.readFile() is an asynchronous method that reads a file wit
             console.log(" Finsihed Reading File ") //Returns the contents of the path.
                     OUTPUT  :-  This is a Testing File 
                                 Finsihed Reading File 
-*/
+*/  
 
 // const fs = require('fs')
 // fs.readFileSync
