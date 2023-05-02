@@ -1,0 +1,46 @@
+Q1 Implement an express application for the following -  Accept a number from the input text field of a user web page and perform the basic arithmetic operations, increment (++), decrement (-), and square, on the number inside a middleware function of server node.js application.
+
+Q2 Create an express application for the following scenario a) Create a text file and add student information(Reg. No., Name, Grade) in the server system. b) Accept a file name from the input text field of a user web page and transfer the requested file using sendFile() function from the server as a response to the button click event from the user web page.
+
+Q3 Create an express application with the following requirements
+a) Accept Student Name, Reg. no., Roll. No., Mobile No. and Mail Id from the input text fields of a client page and perform a chain of validations on the data using the express-validator module in the server application.
+b) Check all the fields are not empty, minimum and maximum lengths of data. Add a submit button on the client web page to submit the data and display the warning messages if c)
+required.
+
+
+Q4 Create a web server application with the http module for the following scenario
+a) Create a server node.js application using http module to verify whether a number is prime or not. b) Accept a number from the input text field of the client page and provide the output values as a response with the click event on a button.
+
+
+Q5  Create a web server application with http module for the following scenario
+a) Create a server node.js application using http module to find the nth Fibonacci number b) Accept a number from the input text field of the client page and provide the output values as a response with the click event on a button.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EXTRA  Display the output values in the user web page as a response to the click event from the button.
+
+
+Q3 Create an express application with the following requirements a) Set and clear the cookies for a client using the cookie-parser module in the server application.
+b) Display the cookie information on the client web page with a click on the show button and clear the cookie information from the system with a click on the reset button on the user web page.
+

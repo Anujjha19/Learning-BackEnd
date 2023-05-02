@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Arithmetic Operations</title>
+  </head>
+  <body>
+    <h1>Perform Arithmetic Operations on a Number</h1>
+    <form id="number-form">
+      <label for="number">Enter a number:</label>
+      <input type="number" id="number" name="number" required>
+      <button type="submit">Calculate</button>
+    </form>
+    <div id="results"></div>
+    <script>
+      const form = document.getElementById('number-form');
+      const resultsDiv = document.getElementById('results');
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const response = await fetch('/calculate', {
+          method: 'POST',
+          body: formData,
+        });
+        const data = await response.json();
+        resultsDiv.innerHTML = `
+          <p>Increment: ${data.increment}</p>
+          <p>Decrement: ${data.decrement}</p>
+          <p>Square: ${data.square}</p>
+        `;
+      });
+    </script>
+  </body>
+</html>
