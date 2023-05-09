@@ -1,3 +1,0 @@
-1234, John Doe, A
-5678, Jane Smith, B+
-9012, Bob Johnson, C-

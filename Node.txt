@@ -1,0 +1,113 @@
+- { 403 } This http status Code Signifies the client  
+  does not have access right to content, Server is
+  refusing to content
+- Node uses { Chrome V8 } engine in core.
+- Node.js is capapble of asynchronous I/O request. { True }
+[ 
+events that are not coordinated in time. - asynchronous 
+]
+
+- Node.js modules are made available externally - { module .exports }
+- Function used to Include modules and libraries in
+  Node.js { require()  }
+- { fs } - is the Modules used for file specific
+  operations
+- { appendFile function of fs MOdule } - Creating a
+  source file and appends that to a destination file
+
+[
+fs.readFile('Path' , function(error , data ){
+        if(error){
+            return response.end('<h1> ERROR ! </h1>')
+        }
+            return  response.end(data);       
+    })
+]
+
+
+
+
+
+
+
+
+
+---------------------------------------------------
+***  Module is a library , set of reuseable function , Its a object , the name of function as key and the function will be as value
+  
+
+[
+Create / Exports - 
+module.exports.add = function (a, b) {
+    return a + b;
+}
+
+Imports -
+const operations = require('./operation');
+console.log(operations.add(2,5));
+
+]
+
+
+-------------------------------------------------
+**
+{ localhost: port  or 127.0.0.1: port }  - address of local Machine 
+{ Control C }  -  to Kill the Server
+
+
+**
+ - Command create a basic Node.js Project   { npm init }
+ - package.json contains the metadata and project 
+   dependencies of Node Project  { TRUE }
+ - we can run multiple Node.js servers on a Single Page
+   Machine .  { TRUE }
+ - Create an instance of HTTP module in Node.js file .
+   { var http = require (' http '); }
+
+[
+const http = require('http');
+const port = 8000;
+const server = http.createServer();
+
+server.listen(port, function (error) {
+    if (error) {
+        console.log(error);
+        return;
+    }
+    console.log("server is up and running on port " , port);
+
+});
+]
+
+[
+function requestHandler(request, response) {
+    console.log(request.url);
+
+    //Define  content to show
+
+    response.writeHead( 200 , {'content-type': 'text/html'} );
+
+    response.end('<h1> Gotcha ! </h1> ');
+}
+
+const server = http.createServer(requestHandler);
+]
+
+**
+ -
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

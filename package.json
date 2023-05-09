@@ -23,6 +23,7 @@
     "mongoosh": "^0.0.7",
     "nanoid": "^4.0.2",
     "nodemon": "^2.0.22",
-    "socket.io": "^4.6.1"
+    "socket.io": "^4.6.1",
+    "zlib": "^1.0.5"
   }
 }
