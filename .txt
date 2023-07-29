@@ -1,0 +1,32 @@
+npm to manage to packages
+Modules : They are set of function to include and  use 
+          in our application.
+        Built-In Modules
+            To Include a module we use require 
+                OLD - type= 'commonjs'   
+                var http = require('http');
+
+                Another way - type='module'
+                import http from 'http';
+        Custom Modules
+            exports.myDateTime = function () {
+                return Date();
+            };
+            var dt = require('./FileName');
+
+            Another Way 
+             const myDateTime = function () {
+                return Date();
+            };
+            export default myDateTime;
+
+
+Function ImportExport
+        -> Only 1 Function
+            export const generateNumber = () => {
+                return `${Math.random() * 100}%`;
+            };
+
+            import  {generateNumber} from './importExport.js' ;
+            console.log(generateNumber());
+        -> Multiple Function
